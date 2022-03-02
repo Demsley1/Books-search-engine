@@ -6,7 +6,7 @@ const { ApolloServer } = require('apollo-server-express') ;
 const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core/dist/plugin/drainHttpServer');
 const http = require('http');
 
-const { typeDefs, resolvers } = require('');
+const { typeDefs, resolvers } = require('./schemas');
 const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +25,7 @@ async function startApolloServer(typeDefs, resolvers) {
   server.applyMiddleware({ app });
 
   await new Promise(resolve => httpServer.listen({PORT}, resolve));
+  console.log(`Use graphql at http://localhost:${PORT}${server.graphqlPath}`);
 }
 
 startApolloServer(typeDefs, resolvers);
