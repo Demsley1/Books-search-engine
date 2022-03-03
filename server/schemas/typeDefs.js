@@ -1,6 +1,5 @@
 // import the graphQL method from apollo server express module
 const { gql } = require('apollo-server-express');
-const { typeDefs } = require('.');
 
 const typeDefs = gql`
     type User {
@@ -8,7 +7,7 @@ const typeDefs = gql`
         username: String
         email: String
         bookCount: Int
-        savedBooks: [Books]
+        savedBooks: [Book]
     }
 
     type Book {
@@ -22,9 +21,8 @@ const typeDefs = gql`
     }
 
     type Query {
-        users: [Users]
+        users: [User]
         user(username: String!): User
-        books: [Book]
     }
 `
 
