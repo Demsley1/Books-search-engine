@@ -19,6 +19,7 @@ const authLink = setContext((_, { headers }) => {
     }
   };
 });
+// create client with graphql url and saved token as header
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache()

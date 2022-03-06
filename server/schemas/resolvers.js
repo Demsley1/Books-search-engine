@@ -17,7 +17,7 @@ const resolvers = {
                 .select('-__v -password')
                 .populate('savedBooks')
         },
-        // get the current users credentials form the logged in session
+        // get the current users credentials from the logged in session token
         me: async(parents, args, context) => {
             if(context.user){
                 const userData = await User.findOne({ _id: context.user._id})
@@ -32,12 +32,14 @@ const resolvers = {
     },
 
     Mutation: {
+        // add a new user and sign a token to that user
         createUser: async(parent, args) => {
             const user = await User.create(args);
             const token = signToken(user);
 
             return { token, user };
         },
+        // find a user by their email address,check the password and sign a token to that user once verified
         login: async(parent, { email, password }) => {
             const user = await User.findOne({ email });
 
@@ -50,6 +52,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user }
         },
+        // save a book according to the book schema to the savedBooks array in the user model
         saveBook: async(parent, { books }, context) => {
             if(context.user){
                 const updatedUser = await User.findOneAndUpdate(
@@ -63,13 +66,14 @@ const resolvers = {
 
             throw new AuthenticationError('You need to be logged in!');
         },
+        // delete a book from the savedBooks array in the user model, according to the provided bookId
         deleteBook: async(parent, { bookId }, context) => {
             if(context.user){
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $pull: { savedBooks: { bookId: bookId } }},
                     { new: true }
-                ).populate('savedBooks')
+                )
 
                 return updatedUser;
             }

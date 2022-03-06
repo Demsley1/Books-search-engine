@@ -7,13 +7,16 @@ import { REMOVE_BOOK } from '../utils/mutations'
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
+  // method to remove a users saved book imported from mutations.js
   const [removeBook]= useMutation(REMOVE_BOOK);
+  // query to search for the logged in users credentials based on the user's json web token with data set as userData
   const {loading, data: userData } = useQuery(GET_ME);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
 
     try {
+      // run the removeBoook mehtod with the variable set as bookID parameter
       await removeBook({
         variables: { bookId: bookId }
       });

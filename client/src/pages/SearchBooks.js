@@ -12,6 +12,7 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
+  // use saveBook method to save a book to the user model in the database
   const[saveBook] = useMutation(SAVE_BOOK)
 
   // create state to hold saved bookId values
@@ -61,6 +62,7 @@ const SearchBooks = () => {
     const books = searchedBooks.find((book) => book.bookId === bookId);
 
     try {
+      // saveBook method with the passed in variable as the found book that matches the bookId
       await saveBook({
         variables: { books: books }
       });

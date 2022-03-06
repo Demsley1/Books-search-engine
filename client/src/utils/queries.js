@@ -18,6 +18,7 @@ export const GET_ME = gql`
     }
 `;
 
+
 export const GET_ME_BASIC = gql`
     {
         me{
