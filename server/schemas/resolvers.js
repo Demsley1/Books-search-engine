@@ -69,7 +69,7 @@ const resolvers = {
                     { _id: context.user._id },
                     { $pull: { savedBooks: { bookId: bookId } }},
                     { new: true }
-                ).poulate('savedBooks')
+                ).populate('savedBooks')
 
                 return updatedUser;
             }
