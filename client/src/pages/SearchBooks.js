@@ -33,6 +33,7 @@ const SearchBooks = () => {
     }
 
     try {
+      // fetch request to google search api
       const response = await searchGoogleBooks(searchInput);
 
       if (!response.ok) {

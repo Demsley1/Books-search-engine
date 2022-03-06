@@ -1,16 +1,20 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
+// import/require apollo server methods, and class constructor for work with graphql.
 const { ApolloServer } = require('apollo-server-express') ;
 const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core/dist/plugin/drainHttpServer');
 const http = require('http');
 const { authMiddleware } = require('./utils/auth');
 
+// import typedefs, and resolvers methods
 const { typeDefs, resolvers } = require('./schemas');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// function to start the apollo server
 async function startApolloServer(typeDefs, resolvers) {
+  // creates a new instance of the apollo server with express router
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     typeDefs,
@@ -19,6 +23,7 @@ async function startApolloServer(typeDefs, resolvers) {
     context: authMiddleware
   });
   
+  // start the server before applying the middleware methods
   await server.start();
   server.applyMiddleware({ app });
 
@@ -26,6 +31,7 @@ async function startApolloServer(typeDefs, resolvers) {
   console.log(`Use graphql at http://localhost:4000${server.graphqlPath}`);
 }
 
+// call the funciton to start the server and pass in the typedefs and resolvers as parameters
 startApolloServer(typeDefs, resolvers);
 
 app.use(express.urlencoded({ extended: true }));

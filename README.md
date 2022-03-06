@@ -15,6 +15,10 @@
 
   This app is hosted live on heroku for anyone to use the production version of it. The development version and code is provided in the projects repo on GitHub. Feel free to download and test the app's code or view the code structure as an example of how to implement a graphql model, and appollo client/server in a existing restful application.
 
+  ## Usage 
+
+  Visit the production ready site on heroku, Link is down below.
+
   ## Screenshots/links
 
   - ![Screenshot1](images/screen1.png)
@@ -23,10 +27,6 @@
 
 
   - Live website link: [Book-Search-Engine]()
-
-  ## Usage 
-
-  Visit the production ready site on heroku, Link is down below.
  
   ## *License*
 

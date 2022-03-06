@@ -16,7 +16,7 @@ const SavedBooks = () => {
   const handleDeleteBook = async (bookId) => {
 
     try {
-      // run the removeBoook mehtod with the variable set as bookID parameter
+      // run the removeBoook method with the variable set as bookID parameter
       await removeBook({
         variables: { bookId: bookId }
       });
